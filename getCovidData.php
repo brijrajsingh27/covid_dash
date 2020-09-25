@@ -2,6 +2,16 @@
 
 include_once './vendor/autoload.php';
 
+/**
+ * Get default counters i.e., for month, week, day
+ */
+
+
+$covidDefaultStats = array();
+
+
+
+
 $covidStats = array();
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -27,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // case when data is found..
         $covidStats = $countryDataFromDb;
     else:
+
         // no data found now fetch & add data into db & fetch to show
 
         // sample URL http://api.coronatracker.com/v3/analytics/newcases/country?countryCode=IN&startDate=2020-09-01&endDate=2020-09-15

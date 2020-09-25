@@ -3,6 +3,7 @@ include_once './views/includes/header.php';
 ?>
 
 <?php
+
 $dashboardCls = new \classes\DashboardView();
 
 $countries = $dashboardCls->showCountries();
@@ -27,10 +28,10 @@ endif;
             <div class="col">
                 Country :   <select name="county" class="form-control" required="required">
                     <option value="">--Select Country--</option>
-<?php
-if ($countries):
-    foreach ($countries as $c => $country) {
-        ?><option value="<?php echo $country['code'] ?>" ><?php echo $country['name'] ?> </option>
+                    <?php
+                    if ($countries):
+                        foreach ($countries as $c => $country) {
+                            ?><option value="<?php echo $country['code'] ?>" ><?php echo $country['name'] ?> </option>
                             <?php
                         }
                     endif;
@@ -48,50 +49,92 @@ if ($countries):
     </form>
 
 
-<?php
-if (count($covidStats)):
-    ?>
+    <?php
+    if (count($covidDefaultStats)):
+        ?>
         <div class="card-body">
             <div class="row">
-            <div class="col-sm-4">
-            <div class="card" style="width: 18rem;">
-                <!--<img class="card-img-top" src="..." alt="Card image cap">-->
-                <div class="card-body alert-warning">
-                    <h5 class="card-title">Total affected</h5>
-                    <p class="card-text"><?php echo number_format(array_sum(array_column($covidStats,'new_infections')),0)  ?></p>
-                    <a href="#" class="btn btn-primary">read more</a>
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                        <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                        <div class="card-body alert-warning">
+                            <h5 class="card-title">Total number of cases for the last one month</h5>
+                            <p class="card-text"><?php echo number_format(array_sum(array_column($covidDefaultStats, 'new_infections')), 0) ?></p>
+                            <a href="#" class="btn btn-primary">read more</a>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-                
-            </div>
-            <div class="col-sm-4">
-            <div class="card" style="width: 18rem;">
-                <!--<img class="card-img-top" src="..." alt="Card image cap">-->
-                <div class="card-body alert-danger">
-                    <h5 class="card-title">Total death</h5>
-                    <p class="card-text"><?php echo number_format(array_sum(array_column($covidStats,'new_deaths')))  ?></p>
-                    <a href="#" class="btn btn-primary">read more</a>
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                        <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                        <div class="card-body alert-danger">
+                            <h5 class="card-title">Total number of cases for the last one week</h5>
+                            <p class="card-text"><?php echo number_format(array_sum(array_column($covidDefaultStats, 'new_deaths'))) ?></p>
+                            <a href="#" class="btn btn-primary">read more</a>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-                
-            </div>
-            <div class="col">
-            <div class="card" style="width: 18rem;">
-                <!--<img class="card-img-top" src="..." alt="Card image cap">-->
-                <div class="card-body alert-success">
-                    <h5 class="card-title">Total recovered</h5>
-                    <p class="card-text"><?php echo number_format(array_sum(array_column($covidStats,'new_recovered')))  ?></p>
-                    <a href="#" class="btn btn-primary">read more</a>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                        <div class="card-body alert-success">
+                            <h5 class="card-title">Total number of cases for the last day</h5>
+                            <p class="card-text"><?php echo number_format(array_sum(array_column($covidDefaultStats, 'new_recovered'))) ?></p>
+                            <a href="#" class="btn btn-primary">read more</a>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-                
-            </div>
             </div>
         </div>
+        <?php
+    endif;
+    ?>
     <?php
-endif;
-?>
+    if (count($covidStats)):
+        ?>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                        <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                        <div class="card-body alert-warning">
+                            <h5 class="card-title">Total affected</h5>
+                            <p class="card-text"><?php echo number_format(array_sum(array_column($covidStats, 'new_infections')), 0) ?></p>
+                            <a href="#" class="btn btn-primary">read more</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                        <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                        <div class="card-body alert-danger">
+                            <h5 class="card-title">Total death</h5>
+                            <p class="card-text"><?php echo number_format(array_sum(array_column($covidStats, 'new_deaths'))) ?></p>
+                            <a href="#" class="btn btn-primary">read more</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                        <div class="card-body alert-success">
+                            <h5 class="card-title">Total recovered</h5>
+                            <p class="card-text"><?php echo number_format(array_sum(array_column($covidStats, 'new_recovered'))) ?></p>
+                            <a href="#" class="btn btn-primary">read more</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <?php
+    endif;
+    ?>
 </div>
-    <?php
-    include_once './views/includes/footer.php';
-    
+<?php
+include_once './views/includes/footer.php';

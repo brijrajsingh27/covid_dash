@@ -80,6 +80,7 @@ class Db {
         } else {
             $fieldstr = '*';
         }
+
         self::$sql = "select {$fieldstr} from {$table} {$where}";
 //        echo self::$sql ;
         $result = mysqli_query($this->conn, self::$sql);
