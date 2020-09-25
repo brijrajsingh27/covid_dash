@@ -50,6 +50,49 @@ endif;
 
 
     <?php
+    if (count($covidDefaultStats)):
+        ?>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                        <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                        <div class="card-body alert-warning">
+                            <h5 class="card-title">Total number of cases for the last one month</h5>
+                            <p class="card-text"><?php echo number_format($covidDefaultStats['month']) ?></p>
+                            <a href="#" class="btn btn-primary">read more</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="card" style="width: 18rem;">
+                        <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                        <div class="card-body alert-danger">
+                            <h5 class="card-title">Total number of cases for the last one week</h5>
+                            <p class="card-text"><?php echo number_format($covidDefaultStats['week']) ?></p>
+                            <a href="#" class="btn btn-primary">read more</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                        <div class="card-body alert-success">
+                            <h5 class="card-title">Total number of cases for the last day</h5>
+                            <p class="card-text"><?php echo number_format($covidDefaultStats['today']) ?></p>
+                            <a href="#" class="btn btn-primary">read more</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <?php
+    endif;
+    ?>
+    <?php
     if (count($covidStats)):
         ?>
         <div class="card-body">

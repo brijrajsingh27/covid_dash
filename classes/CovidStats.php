@@ -57,6 +57,43 @@ ORDER BY `covid_stats`.`last_updated`  ASC";
             return false;
         }
     }
+    
+    public function getCurrentMonth() {
+
+        $qry = "SELECT count(*) as total FROM " . $this->table . " WHERE MONTH(last_updated) = MONTH(CURRENT_DATE()) AND YEAR(last_updated) = YEAR(CURRENT_DATE())
+ ";
+
+        $countryCovidStats = $this->db->query($qry);
+        if ($countryCovidStats) {
+
+            return $countryCovidStats[0]['total'];
+        } else {
+            return false;
+        }
+    }
+    
+    public function getCurrentWeek() {
+
+        $qry = "SELECT count(*) as total FROM " . $this->table . " WHERE YEARWEEK(`last_updated`, 1) = YEARWEEK(CURDATE(), 1) ";
+        $countryCovidStats = $this->db->query($qry);
+        if ($countryCovidStats) {
+            return $countryCovidStats[0]['total'];
+        } else {
+            return false;
+        }
+    }
+
+    public function getTodayStats() {
+
+        $qry = "SELECT count(*) as total FROM " . $this->table . " WHERE DATE(`last_updated`) = CURDATE() ";
+
+        $countryCovidStats = $this->db->query($qry);
+        if ($countryCovidStats) {
+            return $countryCovidStats[0]['total'];
+        } else {
+            return false;
+        }
+    }
 
     public function getCovidStatsByCountryCode($country_code, $start_date, $end_date) {
 //

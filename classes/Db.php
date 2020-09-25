@@ -54,13 +54,17 @@ class Db {
         $result = mysqli_query($this->conn, self::$sql);
         $resultRow = array();
         $i = 0;
-        while ($row = mysqli_fetch_assoc($result)) {
-            foreach ($row as $k => $v) {
-                $resultRow[$i][$k] = $v;
+        if(isset($result->num_rows) && $result->num_rows>0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                foreach ($row as $k => $v) {
+                    $resultRow[$i][$k] = $v;
+                }
+                $i++;
             }
-            $i++;
+            return $resultRow; 
+        }else{
+            return FALSE;
         }
-        return $resultRow; 
     }
     public function select($table, $condition = array(), $field = array()) {
 

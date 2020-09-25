@@ -5,11 +5,13 @@ include_once './vendor/autoload.php';
 /**
  * Get default counters i.e., for month, week, day
  */
-
+$covidStatsCls = new \classes\CovidStats();
 
 $covidDefaultStats = array();
 
-
+$covidDefaultStats['today'] = $covidStatsCls->getTodayStats();   
+$covidDefaultStats['week'] = $covidStatsCls->getCurrentWeek();   
+$covidDefaultStats['month'] = $covidStatsCls->getCurrentMonth();   
 
 
 $covidStats = array();
@@ -29,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
 
-    $covidStatsCls = new \classes\CovidStats();
+
 
     $countryDataFromDb = $covidStatsCls->getCovidStatsByCountryCode($country_code,$start_date,$end_date);
     
