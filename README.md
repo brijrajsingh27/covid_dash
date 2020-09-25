@@ -11,9 +11,19 @@ These instructions will get you a copy of the project up and running on your loc
 
 In order to get this script run successfully at your machine. please follow below mentioned steps:
 
-First of all either download the zip archive of this project or download it using command line
+First of all either download the zip archive of this project or clone it using command line
 
 ```
-*git clone git@github.com:brijrajsingh27/covid_dash.git
-*composer update
+git clone git@github.com:brijrajsingh27/covid_dash.git
 ```
+
+Kindly import all SQL files from Data folder into your database.
+```
+And update database configuration in classes/Config.php
+```
+
+Now, run composer update to install dependencies and required packages
+```
+composer update
+```
+And finally run the script by visiting the url of your application.
