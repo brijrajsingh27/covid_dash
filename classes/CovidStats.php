@@ -60,7 +60,7 @@ ORDER BY `covid_stats`.`last_updated`  ASC";
     
     public function getCurrentMonth() {
 
-        $qry = "SELECT count(*) as total FROM " . $this->table . " WHERE MONTH(last_updated) = MONTH(CURRENT_DATE()) AND YEAR(last_updated) = YEAR(CURRENT_DATE())
+        $qry = "SELECT SUM(new_infections) as total FROM " . $this->table . " WHERE MONTH(last_updated) = MONTH(CURRENT_DATE()) AND YEAR(last_updated) = YEAR(CURRENT_DATE())
  ";
 
         $countryCovidStats = $this->db->query($qry);
@@ -74,7 +74,7 @@ ORDER BY `covid_stats`.`last_updated`  ASC";
     
     public function getCurrentWeek() {
 
-        $qry = "SELECT count(*) as total FROM " . $this->table . " WHERE YEARWEEK(`last_updated`, 1) = YEARWEEK(CURDATE(), 1) ";
+        $qry = "SELECT SUM(new_infections) as total FROM " . $this->table . " WHERE YEARWEEK(`last_updated`, 1) = YEARWEEK(CURDATE(), 1) ";
         $countryCovidStats = $this->db->query($qry);
         if ($countryCovidStats) {
             return $countryCovidStats[0]['total'];
@@ -85,7 +85,7 @@ ORDER BY `covid_stats`.`last_updated`  ASC";
 
     public function getTodayStats() {
 
-        $qry = "SELECT count(*) as total FROM " . $this->table . " WHERE DATE(`last_updated`) = CURDATE() ";
+        $qry = "SELECT SUM(new_infections) as total FROM " . $this->table . " WHERE DATE(`last_updated`) = CURDATE() ";
 
         $countryCovidStats = $this->db->query($qry);
         if ($countryCovidStats) {
